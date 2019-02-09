@@ -17,23 +17,34 @@ class Feed extends Component<Props, State> {
   state = {
     loading: false,
     data: null,
+    page: 1,
   };
 
   componentDidMount() {
-    this.onButtonPress();
+    this.loadMovies();
   }
 
-  onButtonPress = () => {
+  loadMovies = () => {
     this.setState({ loading: true });
     
-    fetchMovies()
+    fetchMovies(this.state.page)
       .then(res => {
-        this.setState({ loading: false, data: res });
+        if (this.state.data) {
+          // this.setState({ data: [...this.state.data, ...res] });
+          this.state.data.push(...res)
+        } else {
+          this.setState({ data: res });
+        }
+        this.setState({ loading: false });
       })
       .catch(err => {
         console.error(err);
         this.setState({ loading: false });
       });
+  };
+
+  loadMore = () => {
+    this.setState((state) => ({ page: state.page + 1}), this.loadMovies);
   };
 
   render() {
@@ -43,13 +54,17 @@ class Feed extends Component<Props, State> {
       <SafeAreaView style={{ backgroundColor: 'white', borderWidth: 1, borderColor: 'red', flex: 1 }}>
         {!data && !loading && (
           <TouchableOpacity
-            onPress={this.onButtonPress}
+            onPress={this.loadMovies}
             style={style.button}
           >
             <Text style={style.buttonLabel}>Find Stuff</Text>
           </TouchableOpacity>
         )}
-        <MoviesList loading={loading} data={data} />
+        <MoviesList
+          loadMore={this.loadMore}
+          loading={loading}
+          data={data}
+        />
       </SafeAreaView>
     );
   }

@@ -12,17 +12,22 @@ type Props = {
 type State = {};
 
 class MoviesList extends Component<Props, State> {
+  state = {
+    page: 1,
+  };
 
   renderMovieThumbNail = ({ item }, index) => (
-    <MovieThumb key={index} {...item} />
+    <MovieThumb key={item.imdbID} {...item} />
   );
 
-  keyExtractor = (item, index) => index.toString();
+  keyExtractor = (item, index) => item.imdbID;
+
+  onEndReached = () => {
+    this.props.loadMore();
+  }
 
   render() {
     const { data, loading } = this.props;
-    if (loading) return <ActivityIndicator size="large" color="blue" />
-    if (!data || !data.length) return null;
     return (
       <View style={{flex: 1}}>
         <FlatList
@@ -30,6 +35,7 @@ class MoviesList extends Component<Props, State> {
           scrollable
           keyExtractor={this.keyExtractor}
           renderItem={this.renderMovieThumbNail}
+          onEndReached={this.onEndReached}
         />
         </View>
     );
