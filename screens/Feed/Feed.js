@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 
+import { fetchMovies } from './../../api';
+
 import sharedStyle from './../../shared/style';
 import style from './style';
 
@@ -16,6 +18,16 @@ class Feed extends Component<Props, State> {
 
   onButtonPress = () => {
     this.setState({ loading: true });
+    
+    fetchMovies()
+      .then(res => {
+        this.setState({ loading: false });
+        console.log('result', res);
+      })
+      .catch(err => {
+        console.error(err);
+        this.setState({ loading: false });
+      });
   };
 
   render() {
