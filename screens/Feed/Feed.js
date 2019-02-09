@@ -40,7 +40,7 @@ class Feed extends Component<Props, State> {
     const { loading, data } = this.state;
 
     return (
-      <View>
+      <SafeAreaView style={{ backgroundColor: 'white', borderWidth: 1, borderColor: 'red', flex: 1 }}>
         {!data && !loading && (
           <TouchableOpacity
             onPress={this.onButtonPress}
@@ -49,8 +49,8 @@ class Feed extends Component<Props, State> {
             <Text style={style.buttonLabel}>Find Stuff</Text>
           </TouchableOpacity>
         )}
-        <MoviesList loading={loading} data={data} style={{flex: 1}} />
-      </View>
+        <MoviesList loading={loading} data={data} />
+      </SafeAreaView>
     );
   }
 }

@@ -24,12 +24,14 @@ class MoviesList extends Component<Props, State> {
     if (loading) return <ActivityIndicator size="large" color="blue" />
     if (!data || !data.length) return null;
     return (
+      <View style={{flex: 1}}>
         <FlatList
           data={data}
           scrollable
           keyExtractor={this.keyExtractor}
           renderItem={this.renderMovieThumbNail}
         />
+        </View>
     );
   }
 }
