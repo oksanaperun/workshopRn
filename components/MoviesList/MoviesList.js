@@ -23,9 +23,9 @@ class MoviesList extends Component<Props, State> {
     if (!data || !data.length) return null;
     return (
       <View style={style.container}>
-      <ScrollView>
-        {data.map(this.renderMovieThumbNail)}
-      </ScrollView>
+        <ScrollView>
+          {data.map(this.renderMovieThumbNail)}
+        </ScrollView>
       </View>
     );
   }

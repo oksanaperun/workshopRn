@@ -1,11 +1,12 @@
 
 // @flow
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 
 import style from './style';
 
 type Props = {
+  Poster: string;
   Title: string;
   Type: string;
   Year: string;
@@ -15,9 +16,14 @@ type State = {};
 
 class MovieThumb extends Component<Props, State> {
   render() {
-    const { Title } = this.props;
+    const { Title, Poster } = this.props;
     return (
       <View style={style.container}>
+        <Image
+          style={style.image}
+          source={{ uri: Poster }}
+          resizeMode="contain"
+        />
         <Text>{Title}</Text>
       </View>
     );

@@ -8,4 +8,7 @@ export default StyleSheet.create({
     marginVertical: 15,
     borderRadius: 6,
   },
+  image: {
+    flex: 1,
+  },
 });

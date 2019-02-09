@@ -26,4 +26,5 @@ const TabNavigator = createBottomTabNavigator({
   },
 });
 
-AppRegistry.registerComponent(appName, () => createAppContainer(TabNavigator));
+// AppRegistry.registerComponent(appName, () => createAppContainer(TabNavigator));
+AppRegistry.registerComponent(appName, () => FeedScreen);

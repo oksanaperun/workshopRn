@@ -36,7 +36,7 @@ class Feed extends Component<Props, State> {
     const { loading, data } = this.state;
 
     return (
-      <SafeAreaView style={sharedStyle.container}>
+      <SafeAreaView style={[sharedStyle.container, { borderColor: 'blue', borderWidth: 1, flex: 1 }]}>
         {!data && !loading && (
           <TouchableOpacity
             onPress={this.onButtonPress}
