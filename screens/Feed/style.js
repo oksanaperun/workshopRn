@@ -8,4 +8,15 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: 'red',
   },
+  button: {
+    width: 280,
+    height: 50,
+    backgroundColor: 'blue',
+    borderRadius: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonLabel: {
+    color: 'white',
+  },
 });
