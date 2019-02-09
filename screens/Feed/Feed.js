@@ -1,7 +1,9 @@
 
 // @flow
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, TouchableOpacity, ActivityIndicator, SafeAreaView } from 'react-native';
+
+import MoviesList from './../../components/MoviesList';
 
 import { fetchMovies } from './../../api';
 
@@ -14,6 +16,7 @@ type State = {};
 class Feed extends Component<Props, State> {
   state = {
     loading: false,
+    data: null,
   };
 
   onButtonPress = () => {
@@ -21,8 +24,7 @@ class Feed extends Component<Props, State> {
     
     fetchMovies()
       .then(res => {
-        this.setState({ loading: false });
-        console.log('result', res);
+        this.setState({ loading: false, data: res });
       })
       .catch(err => {
         console.error(err);
@@ -31,21 +33,20 @@ class Feed extends Component<Props, State> {
   };
 
   render() {
-    const { loading } = this.state;
+    const { loading, data } = this.state;
 
     return (
-      <View style={sharedStyle.container}>
-      {loading ? (
-        <ActivityIndicator size="large" color="white" />
-      ) : (
-        <TouchableOpacity
-          onPress={this.onButtonPress}
-          style={style.button}
-        >
-          <Text style={style.buttonLabel}>Find Stuff</Text>
-        </TouchableOpacity>
-      )}
-      </View>
+      <SafeAreaView style={sharedStyle.container}>
+        {!data && !loading && (
+          <TouchableOpacity
+            onPress={this.onButtonPress}
+            style={style.button}
+          >
+            <Text style={style.buttonLabel}>Find Stuff</Text>
+          </TouchableOpacity>
+        )}
+        <MoviesList loading={loading} data={data} />
+      </SafeAreaView>
     );
   }
 }

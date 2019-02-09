@@ -3,13 +3,18 @@ import { AsyncStorage } from 'react-native';
 
 const apikey = '2f3933e4';
 const endpoint = `http://www.omdbapi.com/?apikey=${apikey}&s=*apple*&p=1`;
+const fakeTimeout = 500;
 
 const fetchMovies = async () => {
   try {
     const storedResult = await AsyncStorage.getItem(endpoint);
 
     if (storedResult !== null) {
-      return JSON.parse(storedResult).Search
+      return new Promise(resolve => {
+        setTimeout(() => {
+          resolve(JSON.parse(storedResult).Search);
+        }, fakeTimeout);
+      });
     }
   } catch (error) {
     console.error('failed to retrieve stored data', error);
