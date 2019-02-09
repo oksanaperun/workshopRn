@@ -7,6 +7,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'pink',
+    borderWidth: 1,
   },
   text: {
     color: 'red',

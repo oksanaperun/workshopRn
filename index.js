@@ -19,6 +19,7 @@ const TabNavigator = createBottomTabNavigator({
   Third: ThirdScreen,
 }, {
   tabBarOptions: {
+    scrollEnabled: true,
     tabStyle: {
     },
     style: {
@@ -26,5 +27,5 @@ const TabNavigator = createBottomTabNavigator({
   },
 });
 
-// AppRegistry.registerComponent(appName, () => createAppContainer(TabNavigator));
-AppRegistry.registerComponent(appName, () => FeedScreen);
+AppRegistry.registerComponent(appName, () => createAppContainer(TabNavigator));
+// AppRegistry.registerComponent(appName, () => FeedScreen);

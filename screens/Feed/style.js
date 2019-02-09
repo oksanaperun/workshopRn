@@ -2,10 +2,6 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-  testView: {
-    width: 200,
-    height: 200,
-  },
   button: {
     width: 280,
     height: 50,
