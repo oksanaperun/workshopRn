@@ -5,28 +5,25 @@
 
  import React from 'react';
 import { AppRegistry, View, Text } from 'react-native';
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createBottomTabNavigator, createTabNavigator, createAppContainer } from "react-navigation";
 
-import App from './App';
-import {name as appName} from './app.json';
+import FeedScreen from './screens/Feed';
+import SecondScreen from './screens/Second';
+import ThirdScreen from './screens/Third';
 
-// In App.js in a new project
+import { name as appName } from './app.json';
 
-
-class HomeScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Home Screen</Text>
-      </View>
-    );
-  }
-}
-
-const AppNavigator = createStackNavigator({
-  Home: {
-    screen: HomeScreen
-  }
+const TabNavigator = createBottomTabNavigator({
+  Home: FeedScreen,
+  Second: SecondScreen,
+  Third: ThirdScreen,
+}, {
+  tabBarOptions: {
+    tabStyle: {
+    },
+    style: {
+    },
+  },
 });
 
-AppRegistry.registerComponent(appName, () => createAppContainer(AppNavigator));
+AppRegistry.registerComponent(appName, () => createAppContainer(TabNavigator));
