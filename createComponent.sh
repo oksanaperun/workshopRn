@@ -26,17 +26,12 @@ export default StyleSheet.create({
 });" > $STYLE_FILE_NAME
 
 echo "
-// @flow
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
 import style from './style';
 
-type Props = {};
-type State = {};
-
-class $COMPONENTNAME extends Component<Props, State> {
-
+class $COMPONENTNAME extends Component {
   render() {
     return (
       <View style={style.container}>

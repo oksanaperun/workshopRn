@@ -1,14 +1,16 @@
-
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
     height: 200,
-    borderColor: 'blue',
-    marginVertical: 15,
-    borderRadius: 6,
+    flexDirection: 'row',
+    padding: 10,
   },
   image: {
-    flex: 1,
+    width: 150,
   },
+  text: {
+    flex: 1,
+    flexWrap: 'wrap',
+  }
 });

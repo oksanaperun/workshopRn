@@ -1,23 +1,22 @@
-
-// @flow
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator, SafeAreaView } from 'react-native';
-
-import MoviesList from './../../components/MoviesList';
-
-import { fetchMovies } from './../../api';
+import { Text, SafeAreaView } from 'react-native';
 
 import sharedStyle from './../../shared/style';
 import style from './style';
 
-type Props = {};
-type State = {};
+import { fetchMovies } from './../../api';
+import MoviesList from './../../components/MoviesList';
+import Loader from '../../components/Loader/Loader';
+import Search from '../../components/Search/Search';
+import LastUpdatedInfo from '../../components/LastUpdatedInfo/LastUpdatedInfo';
 
-class Feed extends Component<Props, State> {
+class Feed extends Component {
   state = {
     loading: false,
     data: null,
     page: 1,
+    selectedYear: null,
+    lastRefresh: null,
   };
 
   componentDidMount() {
@@ -26,12 +25,11 @@ class Feed extends Component<Props, State> {
 
   loadMovies = () => {
     this.setState({ loading: true });
-    
-    fetchMovies(this.state.page)
+
+    fetchMovies(this.state.page, this.state.selectedYear)
       .then(res => {
         if (this.state.data) {
-          // this.setState({ data: [...this.state.data, ...res] });
-          this.state.data.push(...res)
+          this.state.data.push(...res);
         } else {
           this.setState({ data: res });
         }
@@ -44,26 +42,46 @@ class Feed extends Component<Props, State> {
   };
 
   loadMore = () => {
-    this.setState((state) => ({ page: state.page + 1}), this.loadMovies);
+    this.setState((state) => ({ page: state.page + 1 }), this.loadMovies);
   };
 
+  onRefresh = () => {
+    this.setState({ lastRefresh: new Date(), page: 1, data: null }, this.loadMovies);
+  };
+
+  openMovieDetails = (imdbID) => {
+    this.props.navigation.navigate('MovieDetails', { imdbID });
+  }
+
+  loadMoviesByYear = (year) => {
+    this.setState({ selectedYear: year, page: 1, data: null }, this.loadMovies);
+  }
+
   render() {
-    const { loading, data } = this.state;
+    const { loading, data, lastRefresh, selectedYear } = this.state;
+
+    if (loading) {
+      return (
+        <SafeAreaView style={style.safeArea}>
+          <Loader />
+        </SafeAreaView>
+      );
+    }
 
     return (
-      <SafeAreaView style={{ backgroundColor: 'white', borderWidth: 1, borderColor: 'red', flex: 1 }}>
-        {!data && !loading && (
-          <TouchableOpacity
-            onPress={this.loadMovies}
-            style={style.button}
-          >
-            <Text style={style.buttonLabel}>Find Stuff</Text>
-          </TouchableOpacity>
-        )}
+      <SafeAreaView style={style.safeArea}>
+        <Search selectedYear={selectedYear} onYearChange={this.loadMoviesByYear}></Search>
+
+        {lastRefresh && <LastUpdatedInfo lastRefresh={lastRefresh} />}
+
+        {!data && <Text style={sharedStyle.text}>Sorry, no movies found...</Text>}
+
         <MoviesList
-          loadMore={this.loadMore}
-          loading={loading}
           data={data}
+          loading={loading}
+          loadMore={this.loadMore}
+          refresh={this.onRefresh}
+          onThumbPress={this.openMovieDetails}
         />
       </SafeAreaView>
     );

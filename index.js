@@ -2,30 +2,32 @@
  * @format
  * @lint-ignore-every XPLATJSCOPYRIGHT1
  */
-
- import React from 'react';
-import { AppRegistry, View, Text } from 'react-native';
-import { createBottomTabNavigator, createTabNavigator, createAppContainer } from "react-navigation";
+import { AppRegistry } from 'react-native';
+import { createBottomTabNavigator, createStackNavigator, createAppContainer } from "react-navigation";
 
 import FeedScreen from './screens/Feed';
-import SecondScreen from './screens/Second';
-import ThirdScreen from './screens/Third';
+import LoaderDemoScreen from './screens/LoaderDemo';
+import GalleryScreen from './screens/Gallery';
 
-import { name as appName } from './app.json';
+import MovieDetails from './components/MovieDetails/MovieDetails';
 
-const TabNavigator = createBottomTabNavigator({
+const HomeStack = createStackNavigator({
   Home: FeedScreen,
-  Second: SecondScreen,
-  Third: ThirdScreen,
-}, {
-  tabBarOptions: {
-    scrollEnabled: true,
-    tabStyle: {
-    },
-    style: {
-    },
-  },
+  MovieDetails: MovieDetails,
 });
 
-AppRegistry.registerComponent(appName, () => createAppContainer(TabNavigator));
-// AppRegistry.registerComponent(appName, () => FeedScreen);
+const TabNavigator = createBottomTabNavigator({
+  Home: HomeStack,
+  ['Loader Demo']: LoaderDemoScreen,
+  Gallery: GalleryScreen,
+}, {
+    tabBarOptions: {
+      scrollEnabled: true,
+      tabStyle: {
+      },
+      style: {
+      },
+    },
+  });
+
+AppRegistry.registerComponent('main', () => createAppContainer(TabNavigator));

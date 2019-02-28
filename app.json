@@ -1,4 +1,7 @@
 {
   "name": "workshopRn",
-  "displayName": "workshopRn"
+  "displayName": "workshopRn",
+  "expo": {
+    "sdkVersion": "32.0.0"
+  }
 }
