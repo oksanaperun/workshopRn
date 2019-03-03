@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Loader from '../../components/Loader/Loader';
 
-class LoaderDemo extends Component {
-  render() {
+const LoaderDemo = () => {
     return <Loader />;
-  }
-}
+};
 
 export default LoaderDemo;

@@ -26,6 +26,7 @@ class MoviesList extends Component {
 
   render() {
     const { data, loading } = this.props;
+
     return (
       <View style={style.container}>
         <FlatList

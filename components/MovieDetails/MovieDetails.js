@@ -7,6 +7,8 @@ import style from './style';
 import { getMovieDetails } from '../../api';
 import Loader from '../Loader/Loader';
 
+const posterPlaceholder = require('../../img/poster-placeholder.png');
+
 class MovieDetails extends Component {
   state = {
     loading: false,
@@ -18,13 +20,13 @@ class MovieDetails extends Component {
   }
 
   loadMovieDetails() {
-    this.setState({ loading: true });
-
     const imdbId = this.props.navigation.getParam('imdbID');
 
     if (!imdbId) {
       return;
     }
+
+    this.setState({ loading: true });
 
     getMovieDetails(imdbId)
       .then(res => {
@@ -51,7 +53,7 @@ class MovieDetails extends Component {
         </Text>
         <Image
           style={style.container}
-          source={{ uri: Poster }}
+          source={Poster === 'N/A' ? posterPlaceholder : { uri: Poster }}
           resizeMode="contain"
         />
         <Text>

@@ -7,7 +7,8 @@ export default StyleSheet.create({
     padding: 10,
   },
   image: {
-    width: 150,
+    width: 200,
+    height: 180,
   },
   text: {
     flex: 1,
