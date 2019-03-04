@@ -8,6 +8,7 @@ import { getMovieDetails } from '../../api';
 import Loader from '../Loader/Loader';
 
 const posterPlaceholder = require('../../img/poster-placeholder.png');
+const boldTextStyle = { ...sharedStyle.text, ...style.boldText };
 
 class MovieDetails extends Component {
   state = {
@@ -30,10 +31,12 @@ class MovieDetails extends Component {
 
     getMovieDetails(imdbId)
       .then(res => {
-        this.setState({ data: res, loading: false });
+        this.setState({ data: res });
       })
       .catch(err => {
         console.error(err);
+      })
+      .finally(() => {
         this.setState({ loading: false });
       });
   }
@@ -48,7 +51,7 @@ class MovieDetails extends Component {
 
     return (
       <View style={style.container}>
-        <Text style={{ ...sharedStyle.text, ...style.boldText }}>
+        <Text style={boldTextStyle}>
           {Title} ({Year})
         </Text>
         <Image
@@ -57,15 +60,15 @@ class MovieDetails extends Component {
           resizeMode="contain"
         />
         <Text>
-          <Text style={{ ...sharedStyle.text, ...style.boldText }}>Genre: </Text>
+          <Text style={boldTextStyle}>Genre: </Text>
           <Text style={sharedStyle.text}>{Genre}</Text>
         </Text>
         <Text>
-          <Text style={{ ...sharedStyle.text, ...style.boldText }}>Director: </Text>
+          <Text style={boldTextStyle}>Director: </Text>
           <Text style={sharedStyle.text}>{Director}</Text>
         </Text>
         <Text>
-          <Text style={{ ...sharedStyle.text, ...style.boldText }}>Plot: </Text>
+          <Text style={boldTextStyle}>Plot: </Text>
           <Text style={sharedStyle.text}>{Plot}</Text>
         </Text>
       </View>
