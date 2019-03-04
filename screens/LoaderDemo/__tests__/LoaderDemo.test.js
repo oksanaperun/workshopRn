@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import Second from './../Second';
+import LoaderDemo from './../LoaderDemo';
 
-describe('Second component', () => {
+describe('LoaderDemo component', () => {
   let props = {};
 
   beforeEach(() => {
@@ -11,7 +11,7 @@ describe('Second component', () => {
   });
 
   test('renders correctly', () => {
-    const component = shallow(<Second {...props} />);
+    const component = shallow(<LoaderDemo {...props} />);
 
     expect(component).toMatchSnapshot();
   });

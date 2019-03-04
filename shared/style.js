@@ -1,4 +1,3 @@
-
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
@@ -6,10 +5,11 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'pink',
-    borderWidth: 1,
+    backgroundColor: '#dff1df',
   },
   text: {
-    color: 'red',
+    color: '#61bb5d',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
 });

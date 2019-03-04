@@ -1,9 +1,9 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import Third from './../Third';
+import MovieDetails from './../MovieDetails';
 
-describe('Third component', () => {
+describe('MovieDetails component', () => {
   let props = {};
 
   beforeEach(() => {
@@ -11,7 +11,7 @@ describe('Third component', () => {
   });
 
   test('renders correctly', () => {
-    const component = shallow(<Third {...props} />);
+    const component = shallow(<MovieDetails {...props} />);
 
     expect(component).toMatchSnapshot();
   });

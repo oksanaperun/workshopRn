@@ -1,33 +1,24 @@
+import React from 'react';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 
-// @flow
-import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
-
+import sharedStyle from '../../shared/style';
 import style from './style';
 
-type Props = {
-  Poster: string;
-  Title: string;
-  Type: string;
-  Year: string;
-  imdbID: string;
-};
-type State = {};
+const posterPlaceholder = require('../../img/poster-placeholder.png');
 
-class MovieThumb extends Component<Props, State> {
-  render() {
-    const { Title, Poster } = this.props;
-    return (
+const MovieThumb = ({ Title, Year, Poster, imdbID, onThumbPress }) => {
+  return (
+    <TouchableOpacity onPress={() => onThumbPress(imdbID)}>
       <View style={style.container}>
         <Image
           style={style.image}
-          source={{ uri: Poster }}
+          source={Poster === 'N/A' ? posterPlaceholder : { uri: Poster }}
           resizeMode="contain"
         />
-        <Text>{Title}</Text>
+        <Text style={{ ...sharedStyle.text, ...style.text }}>{Title} ({Year})</Text>
       </View>
-    );
-  }
+    </TouchableOpacity>
+  );
 }
 
 export default MovieThumb;
